@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Aqua</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_home">Home</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_start_trip">Start Trip</string>
+    <string name="title_activity_end_trip">End Trip</string>
+    <string name="title_activity_ongoing_trips">Ongoing Trips</string>
+    <string name="title_activity_receive_items">Receive Items</string>
+    <string name="title_activity_log_ongoing">Detail : Ongoing Trip</string>
+    <string name="title_activity_completed_trips">Completed Trips</string>
+    <string name="title_activity_log_completed">Detail : Completed Trip</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+</resources>

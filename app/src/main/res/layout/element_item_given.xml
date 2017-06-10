@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:elevation="20dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:contentPadding="10dp">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true" >
+
+            <Button
+                android:id="@+id/B_edit"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/edit" />
+
+            <TextView
+                android:id="@+id/TV_name"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/B_edit"
+                android:layout_toEndOf="@+id/B_edit"
+                android:layout_marginLeft="50dp"
+                android:layout_marginStart="50dp" />
+
+            <TextView
+                android:id="@+id/TV_quantity"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/TV_name"
+                android:layout_toEndOf="@+id/TV_name" />
+
+            <TextView
+                android:id="@+id/TV_empty"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/TV_quantity"
+                android:layout_toEndOf="@+id/TV_quantity" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

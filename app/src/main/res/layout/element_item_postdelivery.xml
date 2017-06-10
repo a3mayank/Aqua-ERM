@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:elevation="10dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:contentPadding="10dp">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp" >
+
+            <ImageView
+                android:id="@+id/IV_pic"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:contentDescription="desc"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/img"/>
+
+            <TextView
+                android:id="@+id/TV_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/IV_pic"
+                android:paddingBottom="10dp"
+                android:text="txt"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/TV_vehicle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/TV_name"
+                android:layout_below="@+id/TV_name"
+                android:text="txt"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/TV_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/TV_name"
+                android:layout_alignBottom="@+id/TV_name"
+                android:layout_alignParentRight="true"
+                android:text="txt"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/TV_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/TV_vehicle"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="Time STamp" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

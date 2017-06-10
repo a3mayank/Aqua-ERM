@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mayankattri.aqua">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".SplashActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mayankattri.aqua.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".StartTripActivity"
+            android:label="@string/title_activity_start_trip"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mayankattri.aqua.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".EndTripActivity"
+            android:label="@string/title_activity_end_trip"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mayankattri.aqua.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".OngoingTripsActivity"
+            android:label="@string/title_activity_ongoing_trips"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mayankattri.aqua.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".ReceiveItemsActivity"
+            android:label="@string/title_activity_receive_items"
+            android:parentActivityName=".EndTripActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mayankattri.aqua.EndTripActivity" />
+        </activity>
+        <activity
+            android:name=".LogOngoingActivity"
+            android:label="@string/title_activity_log_ongoing"
+            android:parentActivityName=".OngoingTripsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mayankattri.aqua.OngoingTripsActivity" />
+        </activity>
+        <activity
+            android:name=".CompletedTripsActivity"
+            android:label="@string/title_activity_completed_trips"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mayankattri.aqua.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".LogCompletedActivity"
+            android:label="@string/title_activity_log_completed"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mayankattri.aqua.CompletedTripsActivity" />
+        </activity>
+    </application>
+
+</manifest>
