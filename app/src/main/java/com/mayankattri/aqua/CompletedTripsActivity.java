@@ -40,6 +40,7 @@ public class CompletedTripsActivity extends AppCompatActivity {
     public ArrayList<Trip> completedTripsList;
     public static Adapter mAdapter;
     private RecyclerView recyclerView;
+    public static final int AdapterID = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +70,7 @@ public class CompletedTripsActivity extends AppCompatActivity {
         }
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        mAdapter = new Adapter(this, 5, completedTripsList);
+        mAdapter = new Adapter(this, AdapterID, completedTripsList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -161,6 +162,7 @@ public class CompletedTripsActivity extends AppCompatActivity {
                     String time = timeArr[0] + ":" + timeArr[1];
                     Trip item = new Trip(trip_id, name, vehicle_id, date, time);
                     completedTripsList.add(item);
+                    mAdapter.notifyDataSetChanged();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

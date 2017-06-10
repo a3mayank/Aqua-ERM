@@ -40,6 +40,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
         this.id = id;
     }
 
+    public Adapter(int id, List<Item> itemList) {
+        this.itemList = itemList;
+        this.id = id;
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         // for item
         public TextView itemName, quantity, empty, date;
@@ -61,7 +66,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
                     @Override
                     public void onClick(View v) {
                         StartTripActivity.position = getAdapterPosition();
-                        Log.e("Item Position", "" + getLayoutPosition());
                         StartTripActivity.editItemFlag = 1;
                         StartTripActivity.ItemListDialogFragment d = new StartTripActivity.ItemListDialogFragment();
                         d.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -83,12 +87,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.e("id = 2", "Inside OnClick()");
                         Trip item = tripList.get(getAdapterPosition());
                         Intent intent = new Intent(context, ReceiveItemsActivity.class);
                         intent.putExtra("TRIP_ITEM", item);
                         ((Activity) context).startActivityForResult(intent, 1);
-//                        context.startActivity(intent);
                     }
                 });
             } else if (id == 3) {
@@ -102,14 +104,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.e("Adapter", "Inside OnClick()");
                         Trip item = tripList.get(getAdapterPosition());
                         Intent intent = new Intent(context, LogOngoingActivity.class);
                         intent.putExtra("ACTIVE_TRIP_ITEM", item);
                         context.startActivity(intent);
                     }
                 });
-            } else if( id == 4) {
+            } else if( id == 4 || id == 6 || id == 7 || id == 8) {
                 context = view.getContext();
                 itemName = (TextView) view.findViewById(R.id.TV_name);
                 quantity = (TextView) view.findViewById(R.id.TV_quantity);
@@ -125,11 +126,32 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.e("Adapter", "Inside OnClick()");
                         Trip item = tripList.get(getAdapterPosition());
                         Intent intent = new Intent(context, LogCompletedActivity.class);
                         intent.putExtra("COMPLETED_TRIP_ITEM", item);
                         context.startActivity(intent);
+                    }
+                });
+            } else if (id == 9) {
+                context = view.getContext();
+                itemName = (TextView) view.findViewById(R.id.TV_name);
+                quantity = (TextView) view.findViewById(R.id.TV_quantity);
+                empty = (TextView) view.findViewById(R.id.TV_empty);
+                edit = (Button) view.findViewById(R.id.B_edit);
+
+                edit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ReceiveItemsActivity.position = getAdapterPosition();
+                        Log.e("Item Position", ""+getLayoutPosition());
+                        ReceiveItemsActivity.editItemFlag = 1;
+                        ReceiveItemsActivity.GetItemListDialogFragment d = new ReceiveItemsActivity.GetItemListDialogFragment();
+                        d.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                            }
+                        });
+                        d.show(((AppCompatActivity)context).getFragmentManager(), "GetItemListDialogFragment");
                     }
                 });
             }
@@ -155,6 +177,18 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
         } else if (id == 5) {
             itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.element_item_postdelivery, parent, false);
+        } else if (id == 6) {
+            itemView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.element_log_predel_item, parent, false);
+        } else if (id == 7) {
+            itemView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.element_log_predel_item, parent, false);
+        } else if (id == 8) {
+            itemView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.element_logpostdel_item, parent, false);
+        } else if (id == 9) {
+            itemView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.element_item_given, parent, false);
         }
 
         return new MyViewHolder(itemView);
@@ -162,7 +196,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        if (id == 1) {
+        if (id == 1 || id == 4 || id == 6 || id == 7 || id == 8 || id == 9) {
             Item item = itemList.get(position);
             holder.itemName.setText(item.getName());
             holder.quantity.setText(item.getQuantity());
@@ -174,11 +208,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
             holder.tripID.setText(trip.getId());
             holder.pic.setImageResource(R.drawable.kit);
             holder.time.setText(trip.getTime());
-        } else if (id == 4) {
-            Item item = itemList.get(position);
-            holder.itemName.setText(item.getName());
-            holder.quantity.setText(item.getQuantity());
-            if (item.isEmpty()) holder.empty.setText("Empty");
         } else if (id == 5) {
             Trip trip = tripList.get(position);
             holder.name.setText(trip.getName());
@@ -191,7 +220,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
     @Override
     public int getItemCount() {
-        if (id == 1 || id == 4) return itemList.size();
+        if (id == 1 || id == 4 ||id == 6 || id == 7 || id == 8 || id == 9) return itemList.size();
         else if (id == 2 || id == 3 || id == 5) return tripList.size();
         else return 0;
     }

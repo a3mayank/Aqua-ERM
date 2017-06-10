@@ -63,13 +63,7 @@ public class ReceiveItemsActivity extends AppCompatActivity {
     public static int tripID;
     public static Button B_postDelivery;
 
-    public static AdapterGiveItem mAdapter1;
-    public static AdapterReceiveItem mAdapter2;
-    public static RecyclerView recyclerView1, recyclerView2;
-
-    private AdapterPager mSectionsPagerAdapter;
-    private ViewPager mViewPager;
-    private TabLayout tabLayout;
+    public static Adapter mAdapter2;
 
     public static int position;
     public static int editItemFlag;
@@ -108,10 +102,10 @@ public class ReceiveItemsActivity extends AppCompatActivity {
         storeItemListJson = new ArrayList<>();
         givenItemList = new ArrayList<>();
 
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-        mSectionsPagerAdapter = new AdapterPager(getSupportFragmentManager());
+        AdapterPager mSectionsPagerAdapter = new AdapterPager(getSupportFragmentManager());
         mSectionsPagerAdapter.addFragment(new Fragment1(), "Given Items");
         mSectionsPagerAdapter.addFragment(new Fragment2(), "Returned Items");
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -415,12 +409,12 @@ public class ReceiveItemsActivity extends AppCompatActivity {
 
             View rootView = inflater.inflate(R.layout.tab1, container, false);
 
-            recyclerView1 = (RecyclerView) rootView.findViewById(R.id.recycler_view1);
-            mAdapter1 = new AdapterGiveItem(1,givenItemList);
+            RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view1);
+            Adapter mAdapter = new Adapter(6, givenItemList);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-            recyclerView1.setLayoutManager(mLayoutManager);
-            recyclerView1.setItemAnimator(new DefaultItemAnimator());
-            recyclerView1.setAdapter(mAdapter1);
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(mAdapter);
 
             return rootView;
         }
@@ -434,12 +428,12 @@ public class ReceiveItemsActivity extends AppCompatActivity {
 
             View rootView = inflater.inflate(R.layout.tab2, container, false);
 
-            recyclerView2 = (RecyclerView) rootView.findViewById(R.id.recycler_view2);
-            mAdapter2 = new AdapterReceiveItem(receivedItemList);
+            RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view2);
+            Adapter mAdapter = new Adapter(9, receivedItemList);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-            recyclerView2.setLayoutManager(mLayoutManager);
-            recyclerView2.setItemAnimator(new DefaultItemAnimator());
-            recyclerView2.setAdapter(mAdapter2);
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(mAdapter);
 
             return rootView;
         }

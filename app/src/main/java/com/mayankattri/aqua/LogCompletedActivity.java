@@ -42,18 +42,7 @@ public class LogCompletedActivity extends AppCompatActivity {
 
     public static ArrayList<Item> givenItemList = new ArrayList<>();
     public static ArrayList<Item> receivedItemList = new ArrayList<>();
-    public static ArrayAdapter<String> givenAdapter;
-    public static ArrayAdapter<String> receivedAdapter;
-    TextView TV_vehicle, TV_name, TV_meter;
-
-    public static AdapterGiveItem mAdapter1;
-    private static RecyclerView recyclerView1;
-    public static AdapterGiveItem mAdapter2;
-    private static RecyclerView recyclerView2;
-
-    private AdapterPager mSectionsPagerAdapter;
-    private ViewPager mViewPager;
-    private TabLayout tabLayout;
+    public TextView TV_vehicle, TV_name, TV_meter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,10 +59,10 @@ public class LogCompletedActivity extends AppCompatActivity {
         givenItemList = new ArrayList<>();
         receivedItemList = new ArrayList<>();
 
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-        mSectionsPagerAdapter = new AdapterPager(getSupportFragmentManager());
+        AdapterPager mSectionsPagerAdapter = new AdapterPager(getSupportFragmentManager());
         mSectionsPagerAdapter.addFragment(new Fragment1(), "Given Items");
         mSectionsPagerAdapter.addFragment(new Fragment2(), "Returned Items");
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -188,19 +177,14 @@ public class LogCompletedActivity extends AppCompatActivity {
                     } else {
                         givenItemList.add(new Item(item, Integer.toString(empty), true));
                     }
-//                    givenAdapter.notifyDataSetChanged();
-                    mAdapter1.notifyDataSetChanged();
                 }
 
                 JSONArray arr1 = obj.getJSONArray("item_rec");
                 for (int i = 0; i < arr1.length(); i++) {
                     String item = arr1.getJSONObject(i).getString("item_name");
                     int quantity = arr1.getJSONObject(i).getInt("quantity");
-//                    String s = item + " : " + quantity;
                     Log.e("TAG", item);
                     receivedItemList.add(new Item(item, Integer.toString(quantity), false));
-//                    givenAdapter.notifyDataSetChanged();
-                    mAdapter2.notifyDataSetChanged();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -216,12 +200,12 @@ public class LogCompletedActivity extends AppCompatActivity {
 
             View rootView = inflater.inflate(R.layout.tab1, container, false);
 
-            recyclerView1 = (RecyclerView) rootView.findViewById(R.id.recycler_view1);
-            mAdapter1 = new AdapterGiveItem(2,givenItemList);
+            RecyclerView recyclerView1 = (RecyclerView) rootView.findViewById(R.id.recycler_view1);
+            Adapter mAdapter = new Adapter(7, givenItemList);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
             recyclerView1.setLayoutManager(mLayoutManager);
             recyclerView1.setItemAnimator(new DefaultItemAnimator());
-            recyclerView1.setAdapter(mAdapter1);
+            recyclerView1.setAdapter(mAdapter);
 
             return rootView;
         }
@@ -235,12 +219,12 @@ public class LogCompletedActivity extends AppCompatActivity {
 
             View rootView = inflater.inflate(R.layout.tab2, container, false);
 
-            recyclerView2 = (RecyclerView) rootView.findViewById(R.id.recycler_view2);
-            mAdapter2 = new AdapterGiveItem(3,receivedItemList);
+            RecyclerView recyclerView2 = (RecyclerView) rootView.findViewById(R.id.recycler_view2);
+            Adapter mAdapter = new Adapter(8, receivedItemList);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
             recyclerView2.setLayoutManager(mLayoutManager);
             recyclerView2.setItemAnimator(new DefaultItemAnimator());
-            recyclerView2.setAdapter(mAdapter2);
+            recyclerView2.setAdapter(mAdapter);
 
             return rootView;
         }
