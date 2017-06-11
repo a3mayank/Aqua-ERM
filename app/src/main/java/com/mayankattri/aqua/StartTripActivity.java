@@ -128,6 +128,14 @@ public class StartTripActivity extends AppCompatActivity {
         S_type.setThreshold(0);
         S_type.setAdapter(typeAdapter);
 
+        S_type.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent event){
+                S_type.showDropDown();
+                return false;
+            }
+        });
+
         B_predelivery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -196,14 +196,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         entries.add(new PieEntry(ongoing));
         entries.add(new PieEntry(completed));
 
-        PieDataSet dataSet = new PieDataSet(entries, "    Ongoing | Completed");
+        PieDataSet dataSet = new PieDataSet(entries, "");
         dataSet.setDrawIcons(false);
         dataSet.setSliceSpace(3f);
         dataSet.setIconsOffset(new MPPointF(0, 60));
         dataSet.setSelectionShift(5f);
 
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.rgb(50,150,250));
+        colors.add(Color.rgb(50,150,250)); // blue
         colors.add(Color.GREEN);
 
         dataSet.setColors(colors);
