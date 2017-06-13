@@ -43,6 +43,7 @@ public class LogCompletedActivity extends AppCompatActivity {
     public static ArrayList<Item> givenItemList = new ArrayList<>();
     public static ArrayList<Item> receivedItemList = new ArrayList<>();
     public TextView TV_vehicle, TV_name, TV_meter;
+    public static Adapter mAdapter1, mAdapter2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +53,15 @@ public class LogCompletedActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        givenItemList = new ArrayList<>();
+        receivedItemList = new ArrayList<>();
+
+        mAdapter1 = new Adapter(7, givenItemList);
+        mAdapter2 = new Adapter(8, receivedItemList);
+
         TV_vehicle = (TextView) findViewById(R.id.TV_vehicle_value);
         TV_name = (TextView) findViewById(R.id.TV_name_value);
         TV_meter = (TextView) findViewById(R.id.TV_meter_value);
-
-        givenItemList = new ArrayList<>();
-        receivedItemList = new ArrayList<>();
 
         ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -189,6 +193,8 @@ public class LogCompletedActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            LogCompletedActivity.mAdapter1.notifyDataSetChanged();
+            LogCompletedActivity.mAdapter2.notifyDataSetChanged();
         }
     }
 
@@ -201,11 +207,10 @@ public class LogCompletedActivity extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.tab1, container, false);
 
             RecyclerView recyclerView1 = (RecyclerView) rootView.findViewById(R.id.recycler_view1);
-            Adapter mAdapter = new Adapter(7, givenItemList);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
             recyclerView1.setLayoutManager(mLayoutManager);
             recyclerView1.setItemAnimator(new DefaultItemAnimator());
-            recyclerView1.setAdapter(mAdapter);
+            recyclerView1.setAdapter(mAdapter1);
 
             return rootView;
         }
@@ -220,11 +225,10 @@ public class LogCompletedActivity extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.tab2, container, false);
 
             RecyclerView recyclerView2 = (RecyclerView) rootView.findViewById(R.id.recycler_view2);
-            Adapter mAdapter = new Adapter(8, receivedItemList);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
             recyclerView2.setLayoutManager(mLayoutManager);
             recyclerView2.setItemAnimator(new DefaultItemAnimator());
-            recyclerView2.setAdapter(mAdapter);
+            recyclerView2.setAdapter(mAdapter2);
 
             return rootView;
         }

@@ -24,6 +24,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -37,6 +39,8 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.MPPointF;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,6 +66,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private PieChart mChart;
 
     public static int ongoing, completed;
+
+    int[] sampleImages = {R.drawable.carousel1,
+            R.drawable.carousel2, R.drawable.carousel3, R.drawable.carousel4};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,8 +117,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }, 2000);
         }
 
-        CardView B_give = (CardView) findViewById(R.id.cv1);
-        CardView B_receive = (CardView) findViewById(R.id.cv2);
+        LinearLayout B_give = (LinearLayout) findViewById(R.id.cv1);
+        LinearLayout B_receive = (LinearLayout) findViewById(R.id.cv2);
 
         View navHeaderView = navigationView.inflateHeaderView(R.layout.nav_header_home);
         TextView TV_NavHeaderName = (TextView) navHeaderView.findViewById(R.id.TV_nav_header_name);
@@ -134,7 +141,20 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivityForResult(intent, 1);
             }
         });
+
+        CarouselView carouselView;
+        carouselView = (CarouselView) findViewById(R.id.carouselView);
+        carouselView.setPageCount(sampleImages.length);
+        carouselView.setImageListener(imageListener);
     }
+
+    ImageListener imageListener = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+            imageView.setImageResource(sampleImages[position]);
+        }
+    };
+
 
     public void pieChart() {
         mChart = (PieChart) findViewById(R.id.chart1);

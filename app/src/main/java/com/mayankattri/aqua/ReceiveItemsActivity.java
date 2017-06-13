@@ -64,7 +64,8 @@ public class ReceiveItemsActivity extends AppCompatActivity {
     public static int tripID;
     public static Button B_postDelivery;
 
-    public static Adapter mAdapter2;
+    private static RecyclerView recyclerView1, recyclerView2;
+    public static Adapter mAdapter1, mAdapter2;
 
     public static int position;
     public static int editItemFlag;
@@ -102,6 +103,9 @@ public class ReceiveItemsActivity extends AppCompatActivity {
         receivedItemList = new ArrayList<>();
         storeItemListJson = new ArrayList<>();
         givenItemList = new ArrayList<>();
+
+        mAdapter1 = new Adapter(6, givenItemList);
+        mAdapter2 = new Adapter(9, receivedItemList);
 
         ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -292,8 +296,8 @@ public class ReceiveItemsActivity extends AppCompatActivity {
                 else itemObject.put("broken_filled", broken);
                 if (okay.equals("")) itemObject.put("okay_filled_bottles", "0");
                 else itemObject.put("okay_filled_bottles", okay);
-                storeItemListJson.add(itemObject);
 
+                storeItemListJson.add(itemObject);
                 receivedItemList.add(new Item(S_item.getText().toString(), quantity, false));
                 mAdapter2.notifyDataSetChanged();
             } catch (JSONException e) {
@@ -410,12 +414,12 @@ public class ReceiveItemsActivity extends AppCompatActivity {
 
             View rootView = inflater.inflate(R.layout.tab1, container, false);
 
-            RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view1);
-            Adapter mAdapter = new Adapter(6, givenItemList);
+            recyclerView1 = (RecyclerView) rootView.findViewById(R.id.recycler_view1);
+//            mAdapter1 = new Adapter(6, givenItemList);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-            recyclerView.setLayoutManager(mLayoutManager);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(mAdapter);
+            recyclerView1.setLayoutManager(mLayoutManager);
+            recyclerView1.setItemAnimator(new DefaultItemAnimator());
+            recyclerView1.setAdapter(mAdapter1);
 
             return rootView;
         }
@@ -429,12 +433,12 @@ public class ReceiveItemsActivity extends AppCompatActivity {
 
             View rootView = inflater.inflate(R.layout.tab2, container, false);
 
-            RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view2);
-            Adapter mAdapter = new Adapter(9, receivedItemList);
+            recyclerView2 = (RecyclerView) rootView.findViewById(R.id.recycler_view2);
+//            mAdapter2 = new Adapter(9, receivedItemList);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-            recyclerView.setLayoutManager(mLayoutManager);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(mAdapter);
+            recyclerView2.setLayoutManager(mLayoutManager);
+            recyclerView2.setItemAnimator(new DefaultItemAnimator());
+            recyclerView2.setAdapter(mAdapter2);
 
             return rootView;
         }
@@ -563,6 +567,7 @@ public class ReceiveItemsActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            mAdapter1.notifyDataSetChanged();
         }
     }
 
